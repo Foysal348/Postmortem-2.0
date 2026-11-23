@@ -1,8 +1,0 @@
-{
-  "enabled": true,
-  "name": "Run tests on save",
-  "description": "Run pytest when a Python file in app/ is saved",
-  "version": "1",
-  "when": { "type": "fileEdited", "patterns": ["app/**/*.py"] },
-  "then": { "type": "askAgent", "prompt": "Run `uv run pytest -q`. If anything fails, explain the failure and fix it." }
-}
