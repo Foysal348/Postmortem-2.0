@@ -385,3 +385,94 @@ class SurgeryReport(BaseModel):
     timestamp: datetime = Field(
         ..., description="When this report was exported"
     )
+
+
+class ValidationError(BaseModel):
+    """
+    A validation error raised during manifest parsing.
+
+    Recorded per-line during validation (R1). Carries the line number where the error
+    occurred (or None for file-level errors like size/line count), a human-readable
+    message, and a reason code for programmatic handling.
+
+    Satisfies R1.1-R1.6: rejection reasons include byte_size_exceeded, line_count_exceeded,
+    pip_option, url_not_allowed, parse_error, and duplicate.
+    """
+
+    line_number: Optional[int] = Field(
+        default=None,
+        description="Line number where the error occurred (0-indexed), or None for file-level errors",
+    )
+    message: str = Field(
+        ...,
+        description="Human-readable error message (e.g. 'Line 3: invalid requirement: unexpected character')",
+    )
+    reason: str = Field(
+        ...,
+        description="Machine-readable reason code: byte_size_exceeded, line_count_exceeded, pip_option, url_not_allowed, parse_error, or duplicate",
+    )
+
+
+class ParsedRequirement(BaseModel):
+    """
+    A successfully parsed requirement from the manifest.
+
+    Represents a single requirement line after validation and normalization,
+    carrying the canonical name, extras, specifier, marker, and pinning status.
+    Used as input to the metadata recovery and graph-building stages.
+
+    Satisfies R1.1-R1.6: normalized name (R1.4), pinning check (R1.6), duplicate
+    detection input (R1.5), and preservation of raw line and line number for error reporting.
+    """
+
+    canonical_name: str = Field(
+        ...,
+        description="PEP 503 normalized package name (e.g. 'Flask' normalizes to 'flask')",
+    )
+    extras: list[str] = Field(
+        default_factory=list,
+        description="List of requested extras (e.g. ['dev', 'security'])",
+    )
+    specifier: str = Field(
+        ...,
+        description="Version specifier string (e.g. '==1.2.3', '>=1.0,<2', or empty string for bare name)",
+    )
+    marker: Optional[str] = Field(
+        default=None,
+        description="PEP 508 environment marker (e.g. 'python_version>=\"3.6\"'), or None if unconditional",
+    )
+    pinned: bool = Field(
+        ...,
+        description="True iff the specifier is an exact pin (single '==' clause), per R1.6",
+    )
+    raw_line: str = Field(
+        ..., description="The original requirement line from the manifest (for display/error reporting)"
+    )
+    line_number: int = Field(
+        ..., description="0-indexed line number in the manifest"
+    )
+
+
+class ValidationResult(BaseModel):
+    """
+    Result of validating a requirements manifest.
+
+    Produced by validate_manifest() (R1). Contains the list of successfully parsed
+    requirements, any validation errors encountered, and a flag indicating whether
+    the file was rejected entirely (size/line count limits).
+
+    Satisfies R1.1-R1.6: acceptance criteria for input validation.
+    """
+
+    requirements: list[ParsedRequirement] = Field(
+        default_factory=list,
+        description="Successfully parsed and validated requirements",
+    )
+    errors: list[ValidationError] = Field(
+        default_factory=list,
+        description="Validation errors encountered during parsing (parse errors, duplicates, dangerous constructs)",
+    )
+    rejected: bool = Field(
+        default=False,
+        description="True if the file was rejected entirely (exceeds byte size or line count limits)",
+    )

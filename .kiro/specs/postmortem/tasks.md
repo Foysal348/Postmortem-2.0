@@ -29,8 +29,8 @@ The domain layer (`validate.py`, `graph.py`, pure parsing in `metadata.py`/`osv.
     - Test `EvidenceSource` is a closed set of exactly five values
     - _Requirements: R2.4, R2.11, R3.3_
 
-- [ ] 2. Implement R1 input validation — validate.py
-  - [ ] 2.1 Implement strict PEP 508 subset parser, dangerous-construct rejection, normalization, duplicate detection, and unpinned detection
+- [x] 2. Implement R1 input validation — validate.py
+  - [x] 2.1 Implement strict PEP 508 subset parser, dangerous-construct rejection, normalization, duplicate detection, and unpinned detection
     - Implement `validate_manifest(text: str) -> ValidationResult` as a pure function (no I/O)
     - Processing order: byte size check >64 KB → reject (R1.3); line count >200 non-comment lines → reject (R1.3)
     - Per-line: strip inline comments at first `#`; reject lines starting with `-` as pip options (R1.2); parse with `packaging.requirements.Requirement.parse`; reject if parsed `.url` is non-None (URL/VCS/path) (R1.2); accept only `name[extras] specifier [; marker]` grammar (R1.1)
@@ -62,17 +62,17 @@ The domain layer (`validate.py`, `graph.py`, pure parsing in `metadata.py`/`osv.
     - Boundary tests at 64 KB ±1 byte and 200 ±1 requirement lines
     - _Requirements: R1.3_
 
-- [ ] 3. Checkpoint — R1 input validation complete
+- [x] 3. Checkpoint — R1 input validation complete
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 4. Implement R2 metadata recovery — metadata.py and cache.py
-  - [ ] 4.1 Implement cache.py SQLite caching for PyPI and OSV responses
+  - [~] 4.1 Implement cache.py SQLite caching for PyPI and OSV responses
     - Create SQLite schema: `pypi_metadata`, `osv_batch`, `osv_detail` tables per the design
     - TTL-based freshness (default 24h); cache key uses canonical name (R1.4)
     - Never cache failures as success: 404 cached as durable Unknown; timeout cached with short TTL
     - _Requirements: R2.5_
 
-  - [ ] 4.2 Implement PyPI JSON → wheel METADATA → Unknown fallback chain
+  - [~] 4.2 Implement PyPI JSON → wheel METADATA → Unknown fallback chain
     - Implement `recover_dependencies(req: ParsedRequirement, cache: Cache) -> MetadataResult`
     - R2.1: for pinned `name==version`, GET PyPI JSON, read `info.requires_dist`; each becomes a `DependencyEdge` with `evidence.source = "pypi-json"`
     - R2.2: if `requires_dist` missing/empty, find `bdist_wheel` in `releases[version]`, download wheel, read `.dist-info/METADATA` `Requires-Dist` headers without executing package code; `evidence.source = "wheel-metadata"`
@@ -81,7 +81,7 @@ The domain layer (`validate.py`, `graph.py`, pure parsing in `metadata.py`/`osv.
     - Wheel METADATA parsed with `packaging.requirements.Requirement` for consistent semantics
     - _Requirements: R2.1, R2.2, R2.3, R2.4_
 
-  - [ ] 4.3 Implement failure handling for all external service failures
+  - [~] 4.3 Implement failure handling for all external service failures
     - R2.6: skip metadata and OSV fetching for unpinned nodes (short-circuit, return Unknown)
     - R2.7: PyPI unreachable/timeout → `status = UNKNOWN`, `unknown_reason = "PyPI unreachable"/"PyPI timeout"`
     - R2.9: package/version not on PyPI (404) → `status = UNKNOWN`, `unknown_reason = "not found on PyPI"`
@@ -100,11 +100,11 @@ The domain layer (`validate.py`, `graph.py`, pure parsing in `metadata.py`/`osv.
     - Test 404 not-found case
     - _Requirements: R2.1, R2.2, R2.3, R2.9_
 
-- [ ] 5. Checkpoint — R2 metadata recovery complete
+- [~] 5. Checkpoint — R2 metadata recovery complete
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 6. Implement R3 declared graph and R4 conflict detection — graph.py
-  - [ ] 6.1 Implement declared graph builder with marker evaluation and Unknown status assignment
+  - [~] 6.1 Implement declared graph builder with marker evaluation and Unknown status assignment
     - Implement `build_declared_graph(roots, metadata_lookup) -> DeclaredGraph` using `networkx.DiGraph`
     - R3.1: evaluate environment markers against the fixed `TARGET_ENV` (CPython 3.12, Linux x86_64) via `Marker.evaluate(env)`; display target environment in UI
     - R3.2: drop edges guarded by unrequested extras (P0 requests no extras; `extra == ""` evaluates False for non-empty extras)
@@ -122,7 +122,7 @@ The domain layer (`validate.py`, `graph.py`, pure parsing in `metadata.py`/`osv.
     - **Validates: Requirements 3.1, 3.2**
     - Generator: random edges with markers and extra guards
 
-  - [ ] 6.4 Implement conflict detector using SpecifierSet.contains
+  - [~] 6.4 Implement conflict detector using SpecifierSet.contains
     - Implement `detect_conflicts(graph: DeclaredGraph) -> list[Conflict]`
     - R4.1: for each edge `A -> B` with specifier `S`, if B is pinned to version `V` and `V` does not satisfy `S` (`not S.contains(V)`), create a `Conflict(requirer=A, required=B, specifier=S, pinned_version=V, evidence=edge.evidence)`
     - R4.2: conflict record emitted by graph.py; torn artery rendering is a frontend concern (task 12.2)
@@ -133,11 +133,11 @@ The domain layer (`validate.py`, `graph.py`, pure parsing in `metadata.py`/`osv.
     - **Validates: Requirements 4.1**
     - Generator: random `(SpecifierSet, Version)` pairs
 
-- [ ] 7. Checkpoint — Gate 1: R3/R4 declared graph and conflict detection complete
+- [~] 7. Checkpoint — Gate 1: R3/R4 declared graph and conflict detection complete
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 8. Implement R5 vulnerability discovery — osv.py
-  - [ ] 8.1 Implement OSV batch query, per-id details, alias dedup, severity derivation, and "no OSV record ≠ safe" label
+  - [~] 8.1 Implement OSV batch query, per-id details, alias dedup, severity derivation, and "no OSV record ≠ safe" label
     - Implement `query_vulnerabilities(packages, cache) -> OSVResult`
     - R5.1: build `querybatch` request with ≤1000 queries per batch; follow pagination; fetch per-id detail via `GET /v1/vulns/{id}`
     - R5.2: alias deduplication via union-find over all IDs (record id + aliases); `raw_count` = total records, `dedup_count` = connected components; every raw id maps to exactly one finding
@@ -158,11 +158,11 @@ The domain layer (`validate.py`, `graph.py`, pure parsing in `metadata.py`/`osv.
     - **Validates: Requirements 5.3, 5.5, 5.6**
     - Generator: random records with/without `database_specific.severity` and CVSS
 
-- [ ] 9. Checkpoint — R5 vulnerability discovery complete
+- [~] 9. Checkpoint — R5 vulnerability discovery complete
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 10. Implement R6 force remove — graph.py
-  - [ ] 10.1 Implement force remove: highlight dependents, retain shared deps, mark incomplete on Unknown
+  - [~] 10.1 Implement force remove: highlight dependents, retain shared deps, mark incomplete on Unknown
     - Implement `force_remove(graph: DeclaredGraph, package: str) -> ForceRemoveResult`
     - R6.1: `impacted` = exactly the set of nodes with a direct edge to P (the dependents); highlight them
     - R6.2: remove only node P; retain every dependency still reachable from a remaining root (never orphan shared transitive deps)
@@ -184,11 +184,11 @@ The domain layer (`validate.py`, `graph.py`, pure parsing in `metadata.py`/`osv.
     - **Validates: Requirements 6.3**
     - Generator: random graphs with Unknown nodes in impact set
 
-- [ ] 11. Checkpoint — R6 force remove complete
+- [~] 11. Checkpoint — R6 force remove complete
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 12. Implement P0 API and frontend — main.py, templates, static
-  - [ ] 12.1 Implement main.py P0 API routes and orchestration
+  - [~] 12.1 Implement main.py P0 API routes and orchestration
     - `POST /api/patients`: accept multipart file or JSON text; call `validate_manifest`; create in-memory patient store; return patient_id, requirements, errors, rejected, summary
     - `GET /api/patients/{id}`: build declared graph (metadata + OSV), detect conflicts, serialize nodes/edges/conflicts/unknowns/vulnerabilities as JSON per the API design
     - `POST /api/patients/{id}/force-remove`: call `force_remove`; return impacted, retained_shared, incomplete, unknown_involved
@@ -196,7 +196,7 @@ The domain layer (`validate.py`, `graph.py`, pure parsing in `metadata.py`/`osv.
     - In-memory patient store maps `patient_id -> DeclaredGraph` for session life only (no persistence)
     - _Requirements: R1.1–R1.6 (via validate), R2.1–R2.11 (via metadata), R3.1–R3.3, R4.1–R4.2, R5.1–R5.6, R6.1–R6.3_
 
-  - [ ] 12.2 Implement Cytoscape.js graph rendering with data-driven visual classes and evidence drawer
+  - [~] 12.2 Implement Cytoscape.js graph rendering with data-driven visual classes and evidence drawer
     - Server-rendered HTML (Jinja2) with Cytoscape.js graph; no SPA framework
     - R9.1: map node status to CSS classes per the Visual Language table — `node-healthy` (calm pale organ), `node-conflict` (red artery), `node-vuln` (green infection glow, pulse speed from severity; unknown severity = grey, never "critical"), `node-unknown` (fog/mist, label "Unknown: no evidence")
     - R9.1: map edge types — `edge-conflict` (torn red artery), `edge-unknown` (dotted amber); overall state as heartbeat monitor
@@ -204,7 +204,7 @@ The domain layer (`validate.py`, `graph.py`, pure parsing in `metadata.py`/`osv.
     - Every CSS class derived from data fields; no visual state hard-coded
     - _Requirements: R9.1, R4.2, R5.4_
 
-  - [ ] 12.3 Implement keyboard-only navigation, prefers-reduced-motion, and contrast
+  - [~] 12.3 Implement keyboard-only navigation, prefers-reduced-motion, and contrast
     - R9.3: graph container is focusable; Tab moves between nodes in document order; Enter/Space activates drawer; Escape closes; upload form, force-remove control, and drawer reachable without pointer; skip-to-graph link and visible focus rings
     - R9.2: `prefers-reduced-motion` media query disables pulse/heartbeat animations, replacing with static states that preserve information (severity via static glow color + text label; overall state via static icon); all text contrast ≥ 4.5:1 against charcoal background; status never conveyed by color alone (paired with text label/icon)
     - _Requirements: R9.2, R9.3_
@@ -214,17 +214,17 @@ The domain layer (`validate.py`, `graph.py`, pure parsing in `metadata.py`/`osv.
     - Assert graph + evidence render with correct status classes
     - _Requirements: R1.1–R1.6, R2.1–R2.4, R3.1–R3.3, R4.1–R4.2, R9.1_
 
-- [ ] 13. Checkpoint — P0 complete
+- [~] 13. Checkpoint — P0 complete
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 14. [P1 Optional] Implement R7 simulation engine — surgery/
-  - [ ] 14.1 Implement surgery/operations.py: build edited manifest and exact line diff
+  - [~] 14.1 Implement surgery/operations.py: build edited manifest and exact line diff
     - Implement `build_edited_manifest(original, op) -> EditedManifest` for `remove_pin` (delete line), `set_pin` (replace specifier), `force_remove` (no manifest change)
     - Implement `compute_diff(original, edited) -> list[DiffLine]` with exact line-level diff (added/removed/unchanged, with line numbers)
     - R7.5: comparison view composes up to three Operation results side by side
     - _Requirements: R7.1, R7.5_
 
-  - [ ] 14.2 Implement surgery/worker.py: isolated pip dry-run resolver
+  - [~] 14.2 Implement surgery/worker.py: isolated pip dry-run resolver
     - Implement `run_resolver(edited_manifest, timeout=60) -> ResolutionResult`
     - R7.2: run `pip install --dry-run --ignore-installed --only-binary=:all: --python-version 3.12 --platform manylinux2014_x86_64 --target <tmpdir> --report -` as subprocess with `shell=False`, cleared environment, fixed PyPI index, hard timeout
     - R7.3: on failure, extract resolver conflict message into `error`
@@ -237,17 +237,17 @@ The domain layer (`validate.py`, `graph.py`, pure parsing in `metadata.py`/`osv.
     - **Validates: Requirements 7.1**
     - Generator: random operations and original manifests
 
-  - [ ] 14.4 Implement P1 API endpoint: POST /api/patients/{id}/operations
+  - [~] 14.4 Implement P1 API endpoint: POST /api/patients/{id}/operations
     - Accept `Operation` request; call `build_edited_manifest` + `compute_diff` + `run_resolver`; return diff, resolution, osv_before, osv_after per the API design
     - _Requirements: R7.1–R7.5_
 
 - [ ] 15. [P1 Optional] Implement R8 surgical report — report.py
-  - [ ] 15.1 Implement report.py Markdown and JSON export
+  - [~] 15.1 Implement report.py Markdown and JSON export
     - Implement `export_report(patient, operations) -> tuple[str, str]` returning (markdown, json)
     - R8.1: report contains every finding with its evidence and all unknowns; Markdown and JSON produced from the same `SurgeryReport` model so they cannot diverge
     - _Requirements: R8.1_
 
-  - [ ] 15.2 Implement P1 API endpoints: GET /api/patients/{id}/report.md and /report.json
+  - [~] 15.2 Implement P1 API endpoints: GET /api/patients/{id}/report.md and /report.json
     - Return Markdown and JSON report respectively, per the API design
     - _Requirements: R8.1_
 

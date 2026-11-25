@@ -31,6 +31,182 @@
         "chatSessionId": "sess_8407a2aa-96c4-4bc8-86c9-d559f6b6e630",
         "timestamp": 1795628707561
       }
+    ],
+    "2.1 Implement strict PEP 508 subset parser, dangerous-construct rejection, normalization, duplicate detection, and unpinned detection": [
+      {
+        "executionId": "06b1bb68-4b48-488a-8606-0869782422fe",
+        "chatSessionId": "sess_c5ba47eb-66d0-429e-86f6-33e778d785fd",
+        "timestamp": 1795629233557
+      },
+      {
+        "executionId": "06b1bb68-4b48-488a-8606-0869782422fe",
+        "chatSessionId": "sess_c5ba47eb-66d0-429e-86f6-33e778d785fd",
+        "timestamp": 1795630531803
+      }
+    ],
+    "2. Implement R1 input validation — validate.py": [
+      {
+        "executionId": "06b1bb68-4b48-488a-8606-0869782422fe",
+        "chatSessionId": "sess_c5ba47eb-66d0-429e-86f6-33e778d785fd",
+        "timestamp": 1795630531893
+      }
+    ],
+    "3. Checkpoint — R1 input validation complete": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630564806
+      },
+      {
+        "executionId": "c0a61c06-3748-4ed7-9fee-153d66d50eab",
+        "chatSessionId": "sess_c5ba47eb-66d0-429e-86f6-33e778d785fd",
+        "timestamp": 1795631254582
+      },
+      {
+        "executionId": "c0a61c06-3748-4ed7-9fee-153d66d50eab",
+        "chatSessionId": "sess_c5ba47eb-66d0-429e-86f6-33e778d785fd",
+        "timestamp": 1795631535808
+      }
+    ],
+    "4.1 Implement cache.py SQLite caching for PyPI and OSV responses": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630565127
+      }
+    ],
+    "4.2 Implement PyPI JSON → wheel METADATA → Unknown fallback chain": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630565447
+      }
+    ],
+    "4.3 Implement failure handling for all external service failures": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630565715
+      }
+    ],
+    "5. Checkpoint — R2 metadata recovery complete": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630565829
+      }
+    ],
+    "6.1 Implement declared graph builder with marker evaluation and Unknown status assignment": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630566673
+      }
+    ],
+    "6.4 Implement conflict detector using SpecifierSet.contains": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630566810
+      }
+    ],
+    "7. Checkpoint — Gate 1: R3/R4 declared graph and conflict detection complete": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630566938
+      }
+    ],
+    "8.1 Implement OSV batch query, per-id details, alias dedup, severity derivation, and \"no OSV record ≠ safe\" label": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630567032
+      }
+    ],
+    "9. Checkpoint — R5 vulnerability discovery complete": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630567113
+      }
+    ],
+    "10.1 Implement force remove: highlight dependents, retain shared deps, mark incomplete on Unknown": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630567231
+      }
+    ],
+    "11. Checkpoint — R6 force remove complete": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630567515
+      }
+    ],
+    "12.1 Implement main.py P0 API routes and orchestration": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630567729
+      }
+    ],
+    "12.2 Implement Cytoscape.js graph rendering with data-driven visual classes and evidence drawer": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630568061
+      }
+    ],
+    "12.3 Implement keyboard-only navigation, prefers-reduced-motion, and contrast": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630568434
+      }
+    ],
+    "13. Checkpoint — P0 complete": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630568894
+      }
+    ],
+    "14.1 Implement surgery/operations.py: build edited manifest and exact line diff": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630569439
+      }
+    ],
+    "14.2 Implement surgery/worker.py: isolated pip dry-run resolver": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630570216
+      }
+    ],
+    "14.4 Implement P1 API endpoint: POST /api/patients/{id}/operations": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630570854
+      }
+    ],
+    "15.1 Implement report.py Markdown and JSON export": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630571219
+      }
+    ],
+    "15.2 Implement P1 API endpoints: GET /api/patients/{id}/report.md and /report.json": [
+      {
+        "executionId": "8c23c03c-7a89-4163-9a5e-9142a878e5c2",
+        "chatSessionId": "sess_a476cd9a-7278-496f-b76e-53fbed7f066e",
+        "timestamp": 1795630571530
+      }
     ]
   }
 }
