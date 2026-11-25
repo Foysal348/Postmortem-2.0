@@ -10,14 +10,14 @@ The domain layer (`validate.py`, `graph.py`, pure parsing in `metadata.py`/`osv.
 
 ## Tasks
 
-- [ ] 1. Set up project scaffold and core data models
-  - [ ] 1.1 Create project structure, pyproject.toml with uv, and directory layout
+- [x] 1. Set up project scaffold and core data models
+  - [x] 1.1 Create project structure, pyproject.toml with uv, and directory layout
     - Create `app/`, `app/surgery/`, `app/templates/`, `app/static/`, `tests/unit/`, `tests/property/` directories per the design module layout
     - Create `pyproject.toml` with uv, declaring dependencies: fastapi, uvicorn, jinja2, packaging, networkx, httpx, pydantic; dev dependencies: pytest, hypothesis
     - Set up pytest configuration with `tests/unit` and `tests/property` as test paths
     - _Requirements: infrastructure — enables all_
 
-  - [ ] 1.2 Implement models.py with all Pydantic models and enums from the design
+  - [x] 1.2 Implement models.py with all Pydantic models and enums from the design
     - Implement `EvidenceSource` enum (pypi-json, wheel-metadata, osv, pip-report, unknown)
     - Implement `NodeStatus` enum (healthy, conflict, vulnerable, unknown) — the closed enum that makes "Unknown is never healthy" a structural guarantee (R2.11, R3.3)
     - Implement `Evidence`, `PackageNode`, `DependencyEdge`, `Conflict`, `Advisory`, `Finding`, `Operation`, `ResolutionResult`, `SurgeryReport` models with the fields and types specified in the design's Data Models section

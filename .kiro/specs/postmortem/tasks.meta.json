@@ -1,0 +1,36 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Create project structure, pyproject.toml with uv, and directory layout": [
+      {
+        "executionId": "3d35a5c9-347b-4a7f-8948-ad22da988cfa",
+        "chatSessionId": "sess_73d645da-fa76-43bc-9001-d730571bda83",
+        "timestamp": 1795626318722
+      },
+      {
+        "executionId": "3d35a5c9-347b-4a7f-8948-ad22da988cfa",
+        "chatSessionId": "sess_73d645da-fa76-43bc-9001-d730571bda83",
+        "timestamp": 1795627744067
+      }
+    ],
+    "1.2 Implement models.py with all Pydantic models and enums from the design": [
+      {
+        "executionId": "d0d6d84f-09e3-46aa-ad61-b5f255a6a474",
+        "chatSessionId": "sess_8407a2aa-96c4-4bc8-86c9-d559f6b6e630",
+        "timestamp": 1795627957488
+      },
+      {
+        "executionId": "d0d6d84f-09e3-46aa-ad61-b5f255a6a474",
+        "chatSessionId": "sess_8407a2aa-96c4-4bc8-86c9-d559f6b6e630",
+        "timestamp": 1795628707376
+      }
+    ],
+    "1. Set up project scaffold and core data models": [
+      {
+        "executionId": "d0d6d84f-09e3-46aa-ad61-b5f255a6a474",
+        "chatSessionId": "sess_8407a2aa-96c4-4bc8-86c9-d559f6b6e630",
+        "timestamp": 1795628707561
+      }
+    ]
+  }
+}

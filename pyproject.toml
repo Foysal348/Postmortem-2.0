@@ -1,0 +1,27 @@
+[project]
+name = "postmortem"
+version = "0.1.0"
+description = "PostMortem 2.0 — an interactive dependency surgery lab for Python projects"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]==0.115.6",
+    "uvicorn[standard]==0.34.0",
+    "jinja2==3.1.5",
+    "packaging==24.2",
+    "networkx==3.4.2",
+    "httpx==0.28.1",
+    "pydantic==2.10.5",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==8.3.4",
+    "hypothesis==6.123.9",
+    "pytest-asyncio==0.25.2",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/unit", "tests/property"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
