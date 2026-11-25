@@ -1,7 +1,7 @@
 [project]
 name = "postmortem"
 version = "0.1.0"
-description = "PostMortem 2.0 — an interactive dependency surgery lab for Python projects"
+description = "PostMortem 2.0 - an interactive dependency surgery lab for Python projects"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

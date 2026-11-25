@@ -1,7 +1,11 @@
 # PostMortem 2.0 - Tech
 
-## Stack
+## Runtime
 - Python 3.12, FastAPI, Jinja2, `uv` for dependencies.
+- Tests run with: `python -m uv run pytest`
+- Analysis target environment (R3.1): CPython 3.12 Linux x86_64 (what we analyze, not what we run on)
+
+## Stack
 - `packaging` (requirements, specifiers, markers, versions), `networkx` (graph), `httpx` (HTTP).
 - SQLite cache.
 - Frontend: HTML/CSS + minimal JS, Cytoscape.js for the graph (organs/arteries styled via data classes).
