@@ -66,7 +66,7 @@ The domain layer (`validate.py`, `graph.py`, pure parsing in `metadata.py`/`osv.
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 4. Implement R2 metadata recovery — metadata.py and cache.py
-  - [~] 4.1 Implement cache.py SQLite caching for PyPI and OSV responses
+  - [x] 4.1 Implement cache.py SQLite caching for PyPI and OSV responses
     - Create SQLite schema: `pypi_metadata`, `osv_batch`, `osv_detail` tables per the design
     - TTL-based freshness (default 24h); cache key uses canonical name (R1.4)
     - Never cache failures as success: 404 cached as durable Unknown; timeout cached with short TTL

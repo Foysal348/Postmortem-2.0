@@ -476,3 +476,43 @@ class ValidationResult(BaseModel):
         default=False,
         description="True if the file was rejected entirely (exceeds byte size or line count limits)",
     )
+
+
+class CacheStats(BaseModel):
+    """
+    Statistics about cache performance and size.
+
+    Tracks hit/miss counts for PyPI metadata, OSV queries, and OSV details,
+    plus the total cache size on disk.
+
+    Used to monitor cache effectiveness and decide on eviction policies.
+    """
+
+    pypi_hits: int = Field(
+        default=0,
+        description="Number of successful PyPI cache hits",
+    )
+    pypi_misses: int = Field(
+        default=0,
+        description="Number of PyPI cache misses",
+    )
+    osv_query_hits: int = Field(
+        default=0,
+        description="Number of successful OSV query cache hits",
+    )
+    osv_query_misses: int = Field(
+        default=0,
+        description="Number of OSV query cache misses",
+    )
+    osv_details_hits: int = Field(
+        default=0,
+        description="Number of successful OSV details cache hits",
+    )
+    osv_details_misses: int = Field(
+        default=0,
+        description="Number of OSV details cache misses",
+    )
+    cache_size_bytes: int = Field(
+        default=0,
+        description="Total size of the SQLite cache file in bytes",
+    )
